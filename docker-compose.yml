@@ -1,11 +1,16 @@
-version: "3.1"                  # Docker Compose file format version
-services:                       # Declare the services (containers) you want to run
-  db:                           # Name of the service (you choose it)
-    image: postgres:15          # Official PostgreSQL Docker image, version 15
-    restart: always             # Always restart the container if it stops
-    environment:                # Set environment variables inside the container
-      POSTGRES_USER: postgres       # Creates a PostgreSQL user named "postgres"
-      POSTGRES_PASSWORD: secret     # Password for the "postgres" user
-      POSTGRES_DB: testdb           # Creates a database named "testdb"
-    ports:                      # Map container port → host port
-      - "5432:5432"             # Exposes PostgreSQL on localhost:5432
+version: "3.1"
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: testdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
